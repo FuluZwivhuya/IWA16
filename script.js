@@ -86,17 +86,17 @@ const MONTHS = [
     const minutes = hours / 60;
   
     list.innerHTML = /* html */ `
-      <dt>Athlete</dt>
-      <dd>${firstName} ${surname}</dd>
+      <h2>Athlete</h2>
+      <dd>${firstName}${surname}</dd>
   
       <dt>Total Races</dt>
       <dd>${races.length}</dd>
   
       <dt>Event Date (Latest)</dt>
-      <dd>${day} ${month} ${year}</dd>
+      <dd>${day}${month}${year}</dd>
     `;
-    fragment.appendChild();
+    fragment.appendChild(list.innerHTML);
   };
   [NM372], [SV782] = data
-document.querySelector(NM372).appendChild(createHtml(NM372));
-document.querySelector(SV782).appendChild(createHtml(SV782));
+document.querySelector(data).appendChild(createHtml(NM372));
+document.querySelector(data).appendChild(createHtml(SV782));
