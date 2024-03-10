@@ -66,44 +66,37 @@ const MONTHS = [
   // Only edit below this comment
   
   const createHtml = (athlete) => {
-    firstName, surname, id, races = athlete
-    [date], [time] = races.reverse()
+    const { firstName, surname, id, races } = athlete;
+    const [date, time] = races.reverse();
   
     const fragment = document.createDocumentFragment();
   
-    title = document.createElement(h2);
-    title= id;
+    const title = document.createElement('h2');
+    title.textContent = id;
     fragment.appendChild(title);
   
-    const list = document.createElement(dl);
+    const list = document.createElement('dl');
   
-    const day = date.getDate();
-    const month = MONTHS[date.month];
-    const year = date.year;
+    const day = date.getUTCDate();
+    const month = MONTHS[date.getUTCMonth()];
+    const year = date.getUTCFullYear();
   
-    first, second, third, fourth = timeAsArray;
-    total = first + second + third + fourth;
-  
+    const total = time.reduce((acc, curr) => acc + curr, 0);
     const hours = total / 60;
-    const minutes = total / hours / 60;
+    const minutes = hours / 60;
   
     list.innerHTML = /* html */ `
       <dt>Athlete</dt>
-      <dd>${firstName surname}</dd>
+      <dd>${firstName} ${surname}</dd>
   
       <dt>Total Races</dt>
-      <dd>${races}</dd>
+      <dd>${races.length}</dd>
   
       <dt>Event Date (Latest)</dt>
-      <dd>${day month year}</dd>
-  
-      <dt>Total Time (Latest)</dt>
-      <dd>${hours.padStart(2, 0) minutes}</dd>
+      <dd>${day} ${month} ${year}</dd>
     `;
-  
-    fragment.appendChild(list);
-  }
-  
+    fragment.appendChild();
+  };
   [NM372], [SV782] = data
-  document.querySelector(NM372).appendChild(createHtml(NM372));
-  document.querySelector(SV782).appendChild(createHtml(SV782));
+document.querySelector(NM372).appendChild(createHtml(NM372));
+document.querySelector(SV782).appendChild(createHtml(SV782));
