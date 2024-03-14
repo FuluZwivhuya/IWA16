@@ -63,32 +63,39 @@ const data = {
   },
 };
 //my practice
+function formatDate(dateString) {
+  let date = new Date(dateString);
+  const day = date.toLocaleString('default', { day: '2-digit' });
+  const month = date.toLocaleString('default', { month: 'short' });
+  const year = date.toLocaleString('default', { year: 'numeric' });
+  return day + '-' + month + '-' + year;
+}
 
 const EventD = data.response.data.NM372.races; //Get the races array for Nwabisa
 const sortedDates1 = EventD.map((race) => new Date(race.date)).sort(
   (a, b) => a - b); 
 const lastRaceDate1 = sortedDates1[sortedDates1.length - 1]; //Get the last (latest) date
-const EventD1 = data.response.data.SV782.races; //Get the races array for Nwabisa
-const sortedDates2 = EventD.map((race) => new Date(race.date)).sort(
+
+const EventD1 = data.response.data.SV782.races; //Get the races array for Shalk
+const sortedDates2 = EventD1.map((race) => new Date(race.date)).sort(
   (a, b) => a - b); 
 const lastRaceDate2 = sortedDates2[sortedDates2.length - 1];
-
-console.log(lastRaceDate2.toISOString());
-
-const firstName1 = data.response.data.NM372.firstName;//"response"["data"]["NM372"]["firstName"];
+//Nwabisa
+const firstName1 = data.response.data.NM372.firstName;
 const surname1 = data.response.data.NM372.surname;
 const id1 = data.response.data.NM372.id;
-const race1 = data.response.data.NM372.races.length; //number of race done
-const EventDate1 = lastRaceDate1.toISOString();
+const totalRace1 = data.response.data.NM372.races.length; //number of race done
+const EventDate1 = formatDate(lastRaceDate1.toISOString());
+const raceTime1 =data.response.data.NM372.races;
 
-
-console.log(id1); //test console
-
+console.log(raceTime1.forEach); //test console
+//Shalk
 const firstName2 = data.response.data.SV782.firstName
 const surname2 = data.response.data.SV782.surname;
 const id2 = data.response.data.SV782.id;
-const race2 = data.response.data.SV782.races.length;
-const EventDate2 = lastRaceDate2.toISOString();; //not done yet
+const totalRace2 = data.response.data.SV782.races.length;
+const EventDate2 = formatDate(lastRaceDate2.toISOString());
+const raceTime2 =data.response.data.SV782.races;
 
 const section1 = document.querySelector('[data-athlete="NM372"]'); //first section
 const h2a = document.createElement("h2"); //creating h2
@@ -98,9 +105,9 @@ section1.append(list1); //inserting dl in the fisrt section on the html (named i
 h2a.innerText = id1; //adding text in the h2 created in the fisrt section
 list1.innerText =
   // adding information in the list1(dl) created in the fisrt element
-  `Athlete:${firstName1} ${surname1}
-  \n Total Races: ${race1}
-  \n Event Date(Latest):${EventDate1}
+  `Athlete: ${firstName1} ${surname1}
+  \n Total Races: ${totalRace1}
+  \n Event Date(Latest): ${EventDate1}
   \n Total time:`;
 
 const section2 = document.querySelector('[data-athlete="SV782"]');
@@ -109,31 +116,11 @@ const list2 = document.createElement("dl");
 section2.append(h2b);
 section2.append(list2);
 h2b.innerText = id2;
-list2.innerText = `Athlete:${firstName2} ${surname2}
-   \n Total Races: ${race2}
-   \n Event Date(Latest):${EventDate2}
+list2.innerText = `Athlete: ${firstName2} ${surname2}
+   \n Total Races: ${totalRace2}
+   \n Event Date(Latest): ${EventDate2}
    \n Total time:`;
-
-
-function formatDate(dateString) {
-    let date = new Date(dateString);
-    const day = date.toLocaleString('default', { day: '2-digit' });
-    const month = date.toLocaleString('default', { month: 'short' });
-    const year = date.toLocaleString('default', { year: 'numeric' });
-    return day + '-' + month + '-' + year;
-}
-
-const formattedDate = formatDate('2022-12-02T20:00:00.000Z'); // Result: 2-Dec-2022
-/*const eventDate = Object.entries(data.response.data).map(([athleteId, athlete]) => {
-  const allRaceDates = athlete.races.map((race) => new Date(race.date));
-  const latestDate = new Date(Math.max(...allRaceDates));
-  return { athleteId, latestDate };
-  });
-  
-  console.log("Latest dates of event:");
-  eventDate.forEach(({ athleteId, latestDate }) => {
-  console.log(`${athleteId}: ${latestDate.toISOString()}`);*/
-
+ 
 // Only edit below this comment
 
 /*const createHtml = (athlete) => {
